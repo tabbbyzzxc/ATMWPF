@@ -1,0 +1,43 @@
+﻿<Page x:Class="ATMWPF.CardNumberInputPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ATMWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Background="#5B5B5B"
+      Title="CardNumberInputPage">
+
+    <Grid>
+        <ContentControl x:Name="cardNumberInput">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+
+                <Image x:Name="mastercardImage" Visibility="Hidden" Source="logos/mastercard.png" Height="50" Margin="0,0,0,25"/>
+                <Image x:Name="visaImage" Visibility="Hidden" Source="logos/visa.png" Height="40"  Margin="0,0,0,25"/>
+                <TextBox x:Name="cardTextBox" Style="{StaticResource RoundedTextBoxStyle}" MaxLength="16" Height="70" Width="400" FontSize="40" TextAlignment="Center" VerticalAlignment="Bottom" TextChanged="cardTextBox_TextChanged"/>
+
+                <Button Grid.Row="1" Height="50" Width="90" Content="Accept" FontSize="24"  Style="{StaticResource ATMButtonStyle}" VerticalAlignment="Top" Margin="0,25,0,0" Click="ProceedBtn_Click"/>
+            </Grid>
+        </ContentControl>
+
+        <ContentControl x:Name="PINInput" Visibility="Hidden">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <PasswordBox x:Name="PINTextBox" MaxLength="4" Height="70" Width="200"  PasswordChar="●" FontSize="40" VerticalAlignment="Bottom"/>
+
+                <Button Grid.Row="1" Height="50" Width="90" Content="OK" FontSize="24"  Style="{StaticResource ATMButtonStyle}" VerticalAlignment="Top" Margin="0,25,0,0" Click="VerifyPINBtn_Click"/>
+            </Grid>
+        </ContentControl>
+    </Grid>
+    
+</Page>

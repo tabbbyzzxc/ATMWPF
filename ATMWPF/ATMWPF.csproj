@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="logos\instercard.png" />
+    <None Remove="logos\logo.jpg" />
+    <None Remove="logos\mastercard.png" />
+    <None Remove="logos\visa.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ATMLib\ATMLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="logos\instercard.png" />
+    <Resource Include="logos\logo.jpg" />
+    <Resource Include="logos\mastercard.png" />
+    <Resource Include="logos\visa.png" />
+  </ItemGroup>
+
+</Project>
