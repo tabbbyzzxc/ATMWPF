@@ -28,7 +28,6 @@ namespace ATMWPF
 
         private void WithoutCardBtn_Click(object sender, RoutedEventArgs e)
         {
-            ATMDbContext db = new ATMDbContext();
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.ChangeFrameContent(new CardNumberInputPage());
         }

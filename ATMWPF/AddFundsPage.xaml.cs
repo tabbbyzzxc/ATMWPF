@@ -17,15 +17,14 @@ using System.Windows.Shapes;
 namespace ATMWPF
 {
     /// <summary>
-    /// Interaction logic for WithdrawPage.xaml
+    /// Interaction logic for AddFundsPage.xaml
     /// </summary>
-    public partial class WithdrawPage : Page
+    public partial class AddFundsPage : Page
     {
         private MainWindow _mainWindow = (MainWindow)Application.Current.MainWindow;
         private Account _account;
         private ATM _ATMService = new();
-
-        public WithdrawPage(Account account)
+        public AddFundsPage(Account account)
         {
             InitializeComponent();
             _account = account;
@@ -34,7 +33,7 @@ namespace ATMWPF
 
         private void _ATMService_ATMOperationHandler(object sender, ATMOperationArgs args)
         {
-            if( args.IsSuccess == true)
+            if (args.IsSuccess == true)
             {
                 MessageBox.Show(args.OperationMessage, "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -42,7 +41,6 @@ namespace ATMWPF
             {
                 MessageBox.Show(args.OperationMessage, "Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
         }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
@@ -50,21 +48,7 @@ namespace ATMWPF
             _mainWindow.ChangeFrameContent(new CardMenuPage(_account));
         }
 
-        private void WithdrawBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var value = ((Button)sender).Content.ToString();
-            var numericValue = int.Parse(value.Substring(0, 3));
-            _ATMService.Withdraw(numericValue, _account);
-            _mainWindow.ChangeFrameContent(new CardMenuPage(_account));
-        }
-
-        private void SwitchCustomValue_Click(object sender, RoutedEventArgs e)
-        {
-            OptionsContent.Visibility = OptionsContent.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-            CustomValue.Visibility = CustomValue.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible; 
-        }
-
-        private void CustomWithDraw_Click(object sender, RoutedEventArgs e)
+        private void AddFunds_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(ValueTextBox.Text))
             {
@@ -72,11 +56,9 @@ namespace ATMWPF
             }
             var value = int.Parse(ValueTextBox.Text);
 
-            _ATMService.Withdraw(value, _account);
+            _ATMService.AddFunds(value, _account);
 
-            
             _mainWindow.ChangeFrameContent(new CardMenuPage(_account));
         }
-
     }
 }

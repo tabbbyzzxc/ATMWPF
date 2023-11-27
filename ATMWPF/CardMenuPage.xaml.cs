@@ -37,7 +37,7 @@ namespace ATMWPF
 
         private void AddFundsBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            _mainWindow.ChangeFrameContent(new AddFundsPage(_account));
         }
 
         private void CreateTransactionBtn_Click(object sender, RoutedEventArgs e)
@@ -52,7 +52,7 @@ namespace ATMWPF
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            _mainWindow.ChangeFrameContent(new StartPage());
         }
     }
 }

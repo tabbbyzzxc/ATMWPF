@@ -23,7 +23,7 @@ namespace ATMWPF
     /// </summary>
     public partial class CardNumberInputPage : Page
     {
-        private CardService _cardservice = new CardService();
+        private ATM _ATMservice = new();
 
         private Account _account;
         public CardNumberInputPage()
@@ -69,7 +69,7 @@ namespace ATMWPF
                 return;
             }
 
-            var account = _cardservice.FindCard(cardNumber);
+            var account = _ATMservice.FindCard(cardNumber);
             if(account == null)
             {
                 cardTextBox.Clear();
@@ -91,7 +91,7 @@ namespace ATMWPF
                 return;
             }
 
-            if(!_cardservice.CheckPin(pin, _account))
+            if(!_ATMservice.CheckPin(pin, _account))
             {
                 PINTextBox.Clear();
                 MessageBox.Show("Incorrect PIN", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

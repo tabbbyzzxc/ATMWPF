@@ -2,7 +2,7 @@
 using ATMLib;
 using Microsoft.EntityFrameworkCore;
 
-namespace ATMWPF
+namespace ATMLib
 {
     public class ATMDbContext : DbContext
     {
