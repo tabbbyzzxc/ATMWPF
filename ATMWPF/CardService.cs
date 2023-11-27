@@ -28,5 +28,19 @@ namespace ATMWPF
                 
             return false;
         }
+
+        public bool Withdraw(int value, Account account)
+        {
+            if(account.Balance < value)
+            {
+                return false;
+            }
+
+            ATMDbContext db = new ATMDbContext();
+            account.Balance -= value;
+            db.Update(account);
+            db.SaveChanges();
+            return true;
+        }
     }
 }

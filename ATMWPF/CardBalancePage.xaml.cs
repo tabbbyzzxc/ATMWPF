@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,10 +22,18 @@ namespace ATMWPF
     /// </summary>
     public partial class CardBalancePage : Page
     {
+        private MainWindow _mainWindow = (MainWindow)Application.Current.MainWindow;
+        private Account _account;
         public CardBalancePage(Account account)
         {
             InitializeComponent();
             DataContext = account;
+            _account = account;
+        }
+
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _mainWindow.ChangeFrameContent(new CardMenuPage(_account));
         }
     }
 }

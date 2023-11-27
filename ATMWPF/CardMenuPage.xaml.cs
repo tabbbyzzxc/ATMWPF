@@ -47,7 +47,7 @@ namespace ATMWPF
 
         private void WithdrawBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            _mainWindow.ChangeFrameContent(new WithdrawPage(_account));
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)

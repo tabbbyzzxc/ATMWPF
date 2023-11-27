@@ -14,5 +14,7 @@
         <Label Content="Balance: " HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Foreground="White"/>
             <Label Content="{Binding Balance}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Foreground="White"/>
         </StackPanel>
+
+        <Button Style="{StaticResource ATMButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="325" Height="60" Margin="0,15,0,15" Content="Back" Click="BackBtn_Click" />
     </Grid>
 </Page>

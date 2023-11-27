@@ -1,0 +1,55 @@
+﻿<Page x:Class="ATMWPF.WithdrawPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ATMWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Background="#5B5B5B"
+      Title="WithdrawPage">
+
+    <Grid>
+        
+        <ContentControl x:Name="OptionsContent" Visibility="Visible">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Bottom">
+                    <Button Style="{StaticResource ATMButtonStyle}" Height="60" Width="325" VerticalAlignment="Bottom" Content="500 UAH" Click="WithdrawBtn_Click" />
+                    <Button Style="{StaticResource ATMButtonStyle}" Height="60" Width="325" VerticalAlignment="Bottom" Margin="0,20,0,20" Content="Custom value" Click="SwitchCustomValue_Click" />
+                    <Button Style="{StaticResource ATMButtonStyle}" Height="60" Width="325" VerticalAlignment="Bottom" Margin="0,0,0,20" Content="Back" Click="BackBtn_Click" />
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Column="0" VerticalAlignment="Bottom">
+                    <Button Style="{StaticResource ATMButtonStyle}" Height="60" Width="325" VerticalAlignment="Bottom" Content="100 UAH" Click="WithdrawBtn_Click" />
+                    <Button Style="{StaticResource ATMButtonStyle}" Height="60" Width="325" VerticalAlignment="Bottom" Margin="0,20,0,20" Content="200 UAH" Click="WithdrawBtn_Click" />
+                </StackPanel>
+            </Grid>
+        </ContentControl>
+
+        <ContentControl x:Name="CustomValue" Visibility="Hidden">
+            <Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox x:Name="ValueTextBox" MaxLength="4" Height="70" Width="200" FontSize="40" VerticalAlignment="Bottom"/>
+
+                    <Button Style="{StaticResource ATMButtonStyle}" Height="60" Width="325" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,0,20" Content="Withdraw" Click="CustomWithDraw_Click" />
+                    <Button Style="{StaticResource ATMButtonStyle}" Height="60" Width="325" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,20" Content="Back" Click="SwitchCustomValue_Click" />
+                </Grid>
+            </Grid>
+        </ContentControl>
+        
+    </Grid>
+</Page>
