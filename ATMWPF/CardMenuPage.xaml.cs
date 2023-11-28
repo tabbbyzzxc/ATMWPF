@@ -42,7 +42,7 @@ namespace ATMWPF
 
         private void CreateTransactionBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            _mainWindow.ChangeFrameContent(new TransactionPage(_account));
         }
 
         private void WithdrawBtn_Click(object sender, RoutedEventArgs e)

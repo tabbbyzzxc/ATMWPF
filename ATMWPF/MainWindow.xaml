@@ -14,7 +14,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label Content="PrivatBank" FontSize="50" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="PrimatBank" FontSize="50" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,50,0" Grid.Column="1">
             <Label Content="Customer Support" FontSize="20"/>

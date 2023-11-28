@@ -1,4 +1,4 @@
-﻿<Page x:Class="ATMWPF.CardNumberInputPage"
+﻿<Page x:Class="ATMWPF.TransactionPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,10 +7,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Background="#5B5B5B"
-      Title="CardNumberInputPage">
+      Title="TransactionPage">
 
     <Grid>
-        <ContentControl x:Name="cardNumberInput">
+        <ContentControl x:Name="cardInfo">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -20,22 +20,22 @@
                 <Image x:Name="visaImage" Visibility="Hidden" Source="logos/visa.png" Height="40"  Margin="0,0,0,25"/>
                 <TextBox x:Name="cardTextBox" Style="{StaticResource RoundedTextBoxStyle}" MaxLength="16" Height="70" Width="400" FontSize="40" TextAlignment="Center" VerticalAlignment="Bottom" TextChanged="cardTextBox_TextChanged"/>
 
-                <Button Grid.Row="1" Height="50" Width="90" Content="Accept" FontSize="24"  Style="{StaticResource ATMButtonStyle}" VerticalAlignment="Top" Margin="0,25,0,0" Click="ProceedBtn_Click"/>
+                <Button Style="{StaticResource ATMButtonStyle}" Height="60" Width="325" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,0,20" Content="Continue" Click="CardCheckContinueBtn_Click" />
+                <Button Style="{StaticResource ATMButtonStyle}" Height="60" Width="325" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,20" Content="Back" Click="BackBtn_Click" />
             </Grid>
         </ContentControl>
-
-        <ContentControl x:Name="PINInput" Visibility="Hidden">
+        
+        <ContentControl x:Name="fundsInput" Visibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <PasswordBox x:Name="PINTextBox" MaxLength="4" Height="70" Width="200"  PasswordChar="●" FontSize="40" VerticalAlignment="Bottom"/>
+                <TextBox x:Name="ValueTextBox" MaxLength="4" Height="70" Width="200" FontSize="40" VerticalAlignment="Bottom"/>
 
-                <Button Grid.Row="1" Height="50" Width="90" Content="OK" FontSize="24"  Style="{StaticResource ATMButtonStyle}" VerticalAlignment="Top" Margin="0,25,0,0" Click="VerifyPINBtn_Click"/>
+                <Button Grid.Row="1" Height="50" Width="90" Content="OK" FontSize="24"  Style="{StaticResource ATMButtonStyle}" VerticalAlignment="Top" Margin="0,25,0,0" Click="MakeATransactionBtn_Click"/>
             </Grid>
         </ContentControl>
     </Grid>
-    
 </Page>

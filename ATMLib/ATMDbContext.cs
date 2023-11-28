@@ -27,7 +27,16 @@ namespace ATMLib
                 CardType = CardType.Mastercard
             };
 
-            Accounts.Add(account);
+            var tran_account = new Account
+            {
+                CardNumber = "5168755907057704",
+                CardPIN = "4321",
+                Name = "Abam",
+                Surname = "Lohovskii",
+                Balance = 1000,
+                CardType = CardType.Visa
+            };
+            Accounts.AddRange(account,tran_account);
 
             var ATM = new ATM
             {

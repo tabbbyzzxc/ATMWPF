@@ -1,4 +1,6 @@
 ﻿
+using System.Security.Principal;
+
 namespace ATMLib
 {
 
@@ -80,6 +82,21 @@ namespace ATMLib
             ATMOperationHandler?.Invoke(this, new ATMOperationArgs { OperationMessage = $"You have successfully deposited {value} UAH into your account", IsSuccess = true });
         }
 
+
+        public void MakeATransaction(int value, Account senderAccount, Account recipientAccount)
+        {
+            if (value <= 0)
+            {
+                ATMOperationHandler?.Invoke(this, new ATMOperationArgs { OperationMessage = $"The value you want to deposit to {recipientAccount.Name} {recipientAccount.Surname} is incorrect.", IsSuccess = false });
+                return;
+            }
+
+            senderAccount.Balance -= value;
+            recipientAccount.Balance += value;
+            db.UpdateRange(senderAccount, recipientAccount);
+            db.SaveChanges();
+            ATMOperationHandler?.Invoke(this, new ATMOperationArgs { OperationMessage = $"You have successfully sent {recipientAccount.Name} {recipientAccount.Surname} {value} UAH", IsSuccess = true });
+        }
     }
 
 
