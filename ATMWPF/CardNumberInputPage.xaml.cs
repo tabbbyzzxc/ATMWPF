@@ -29,8 +29,23 @@ namespace ATMWPF
         public CardNumberInputPage()
         {
             InitializeComponent();
-            
+            _ATMservice.AccountOperationHandler += _ATMservice_AccountOperationHandler;
 
+        }
+
+        private void _ATMservice_AccountOperationHandler(object sender, AccountOperationArgs args)
+        {
+            if (args.Error == ErrorType.User)
+            {
+                MessageBox.Show(args.OperationMessage, "User failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show(args.OperationMessage, "System failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            cardTextBox.Clear();
+            
         }
 
         private void cardTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -61,19 +76,9 @@ namespace ATMWPF
 
         private void ProceedBtn_Click(object sender, RoutedEventArgs e)
         {
-            var cardNumber = cardTextBox.Text;
-            if (cardNumber.Length < 16 || string.IsNullOrEmpty(cardNumber))
+            var account = _ATMservice.FindCard(cardTextBox.Text);
+            if(account == null) 
             {
-                cardTextBox.Clear();
-                MessageBox.Show("Card number must be 16 digit long", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            var account = _ATMservice.FindCard(cardNumber);
-            if(account == null)
-            {
-                cardTextBox.Clear();
-                MessageBox.Show("Card doesn`t exists", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             _account = account;
@@ -84,23 +89,16 @@ namespace ATMWPF
         private void VerifyPINBtn_Click(object sender, RoutedEventArgs e)
         {
             var pin = ConvertSecureStringToString(PINTextBox.SecurePassword);
-            if (pin.Length < 4 || string.IsNullOrEmpty(pin))
-            {
-                PINTextBox.Clear();
-                MessageBox.Show("PIN code must be 4 digit long", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            if(!_ATMservice.CheckPin(pin, _account))
-            {
-                PINTextBox.Clear();
-                MessageBox.Show("Incorrect PIN", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            else
+            if(_ATMservice.CheckPin(pin, _account))
             {
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                 mainWindow.ChangeFrameContent(new CardMenuPage(_account));
+                
+            }
+            else
+            {
+                PINTextBox.Clear();
+                return;
             }
         }
 

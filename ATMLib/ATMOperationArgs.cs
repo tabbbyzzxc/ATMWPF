@@ -7,6 +7,4 @@ namespace ATMLib
 
         public bool IsSuccess { get; set; }
     }
-
-    
 }

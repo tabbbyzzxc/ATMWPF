@@ -1,5 +1,7 @@
 ﻿
+using System.Net.NetworkInformation;
 using System.Security.Principal;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ATMLib
 {
@@ -21,18 +23,38 @@ namespace ATMLib
             
         public delegate void ATMOperation(object sender, ATMOperationArgs args);
 
+        public delegate void AccountOperation(object sender, AccountOperationArgs args);
+
         public event ATMOperation ATMOperationHandler;
+
+        public event AccountOperation AccountOperationHandler;
 
         public Account FindCard(string cardNumber)
         {
+            if (cardNumber.Length < 16 || string.IsNullOrEmpty(cardNumber))
+            {
+                AccountOperationHandler?.Invoke(this, new AccountOperationArgs { OperationMessage = "Card number must be 16 digit long", Error = ErrorType.User});
+                return null;
+            }
+
             var account = db.Accounts.FirstOrDefault(x => x.CardNumber == cardNumber);
-
+            if (account == null)
+            {
+                AccountOperationHandler?.Invoke(this, new AccountOperationArgs { OperationMessage = "Card doesn`t exists", Error = ErrorType.System });
+                return null;
+            }
+            
             return account;
-
         }
-
         public bool CheckPin(string pinCode, Account _account)
         {
+
+            if (pinCode.Length < 4 || string.IsNullOrEmpty(pinCode))
+            {
+                AccountOperationHandler?.Invoke(this, new AccountOperationArgs { OperationMessage = "PIN code must be 4 digit long", Error = ErrorType.User });
+                return false;
+            }
+
             var account = db.Accounts.First(x => x.Id == _account.Id);
 
             if (account.CardPIN == pinCode)
@@ -40,6 +62,7 @@ namespace ATMLib
                 return true;
             }
 
+            AccountOperationHandler?.Invoke(this, new AccountOperationArgs { OperationMessage = "Incorrect PIN", Error = ErrorType.User });
             return false;
         }
 
